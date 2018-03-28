@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">World Clock</string>
+    <string name="StandardTime">" Standard Time"</string>
 </resources>

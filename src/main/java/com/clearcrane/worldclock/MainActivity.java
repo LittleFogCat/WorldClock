@@ -1,10 +1,16 @@
 package com.clearcrane.worldclock;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
+
+import java.io.IOException;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
@@ -15,10 +21,29 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            RandomUtil.init(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         getFragmentManager().beginTransaction()
                 .add(R.id.container, new WorldClockFragment())
                 .commit();
         Log.d(TAG, "onCreate: " + onSize());
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            String languageCode = intent.getStringExtra("languageCode");
+            Resources resources = getResources();
+            Configuration configuration = resources.getConfiguration();
+            if (languageCode != null && (languageCode.contains("cn") || languageCode.contains("zh") || languageCode.contains("chn"))) {
+                resources.getConfiguration().locale = Locale.CHINA;
+            } else {
+                resources.getConfiguration().locale = Locale.US;
+            }
+            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        }
     }
 
     @Override

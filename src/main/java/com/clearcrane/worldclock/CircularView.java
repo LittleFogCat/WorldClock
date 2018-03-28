@@ -31,6 +31,7 @@ public class CircularView extends LinearLayout {
     private ImageView mAliceImageView;
     private ImageView mBobImageView;
 
+
     private ImageView mLeftView;
     private ImageView mRightView;
 
@@ -40,7 +41,7 @@ public class CircularView extends LinearLayout {
 
     private float mStepPx = IMAGE_WIDTH / 24;
 
-    private int mCurrentRegion = 0;// 时区
+    private Animator.AnimatorListener mAnimatorListener;
 
     private Animator.AnimatorListener mDefaultListener = new AnimatorListenerAdapter() {
 
@@ -80,7 +81,7 @@ public class CircularView extends LinearLayout {
         mBobImageView = mRootView.findViewById(R.id.img2);
 
         if (mResId != 0) {
-            Log.d(TAG, "init: load IMAGE");
+            Log.d(TAG, "init: load image");
             Glide.with(context).load(mResId).into(mAliceImageView);
             Glide.with(context).load(mResId).into(mBobImageView);
         }
@@ -127,6 +128,21 @@ public class CircularView extends LinearLayout {
     private void move(View view,
                       float toX) {
         view.setX(toX);
+    }
+
+    /**
+     * 移动x个像素
+     */
+    public void move(float x) {
+        while (x + mLeftView.getX() >= 0) {
+            x -= IMAGE_WIDTH;
+        }
+        while (x + mLeftView.getX() <= mScreenWidth - 2 * IMAGE_WIDTH) {
+            x += IMAGE_WIDTH;
+        }
+
+        move(mLeftView, mLeftView.getX() + x);
+        move(mRightView, mRightView.getX() + x);
     }
 
     private void moveLeftViewToRight() {
@@ -209,9 +225,20 @@ public class CircularView extends LinearLayout {
 
     }
 
-    private Animator.AnimatorListener mAnimatorListener;
 
     public void setOnAnimatorListener(Animator.AnimatorListener listener) {
         mAnimatorListener = listener;
+    }
+
+    public ImageView getLeftView() {
+        return mLeftView;
+    }
+
+    public ImageView getRightView() {
+        return mRightView;
+    }
+
+    public float getImageWidth() {
+        return IMAGE_WIDTH;
     }
 }
