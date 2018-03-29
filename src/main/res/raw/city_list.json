@@ -1,0 +1,23 @@
+[
+  {
+    "cityNameCN": "北京",
+    "cityNameEN": "Beijing",
+    "x": 1293,
+    "y": 349,
+    "timezone": 8
+  },
+  {
+    "cityNameCN": "上海",
+    "cityNameEN": "Shanghai",
+    "x": 1325,
+    "y": 406,
+    "timezone": 8
+  },
+  {
+    "cityNameCN": "阿瓦隆",
+    "cityNameEN": "Avalon",
+    "x": 1288,
+    "y": 825,
+    "timezone": 8
+  }
+]

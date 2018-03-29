@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     android:background="#888">
 
-    <com.clearcrane.worldclock.TimezoneView
+    <com.clearcrane.worldclock.views.TimezoneView
         android:id="@+id/circular"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:src="@drawable/worldclock8_01" />
 
-    <ImageView
-        android:id="@+id/ruler"
+    <View
+        android:id="@+id/mask"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="725px" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_mask" />
+
+    <!--<ImageView-->
+        <!--android:id="@+id/ruler"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="725px" />-->
 
     <TextView
         android:id="@+id/tvTimezone"
@@ -25,24 +32,35 @@
         android:layout_marginTop="360px"
         android:alpha="0.85"
         android:background="@drawable/wc_title_bg"
-        android:padding="10px"
+        android:paddingBottom="10px"
+        android:paddingLeft="16px"
+        android:paddingRight="16px"
+        android:paddingTop="10px"
         android:text="东八区标准时间"
         android:textColor="@color/gray3"
         android:textSize="28px" />
 
     <TextView
         android:id="@+id/tvTime"
-        android:shadowColor="#000"
-        android:shadowDx="4"
-        android:shadowDy="4"
-        android:shadowRadius="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="240px"
         android:layout_marginTop="435px"
+        android:shadowColor="#000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="10"
         android:text="10:12:03"
         android:textColor="@color/white"
-        android:textSize="96px" />
+        android:textSize="96px"
+        android:visibility="gone" />
+
+    <com.clearcrane.worldclock.views.TimeView
+        android:id="@+id/timeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240px"
+        android:layout_marginTop="435px" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -53,4 +71,4 @@
         android:text="2018年3月21日, 星期9"
         android:textColor="@color/white"
         android:textSize="36px" />
-</FrameLayout>
+</com.zhy.autolayout.AutoFrameLayout>

@@ -1,4 +1,4 @@
-package com.clearcrane.worldclock;
+package com.clearcrane.worldclock.views;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -45,15 +45,17 @@ public class TimezoneView extends CircularView {
         return timezone;
     }
 
-    public static String getTimezoneString(int zone, String languageCode) {
+    private String[] chnRegion = {"西十一区", "西十区", "西九区", "西八区", "西七区", "西六区", "西五区", "西四区", "西三区",
+            "西二区", "西一区", "零时区", "东一区", "东二区", "东三区", "东四区", "东五区", "东六区", "东七区",
+            "东八区", "东九区", "东十区", "东十一区", "十二区"};
+
+    public String getTimezoneString(int zone, String languageCode) {
         if (zone < -11 || zone > 12) {
             return null;
         }
-        String[] chnRegion = {"西十一区", "西十区", "西九区", "西八区", "西七区", "西六区", "西五区", "西四区", "西三区",
-                "西二区", "西一区", "零时区", "东一区", "东二区", "东三区", "东四区", "东五区", "东六区", "东七区",
-                "东八区", "东九区", "东十区", "东十一区", "十二区"};
-        if ("ZH-CN".equalsIgnoreCase(languageCode) || "ZHCN".equalsIgnoreCase(languageCode)
-                || "CHN".equalsIgnoreCase(languageCode) || "CN".equalsIgnoreCase(languageCode)) {
+        if ("ZH-CN".equalsIgnoreCase(languageCode) || "ZHCN".equalsIgnoreCase(languageCode) ||
+                "CHN".equalsIgnoreCase(languageCode) || "CN".equalsIgnoreCase(languageCode) ||
+                Locale.CHINA.getLanguage().equalsIgnoreCase(languageCode)) {
             return chnRegion[zone + 11];
         } else {
             return "GMT" + (zone > 0 ? "+" + zone : zone);
@@ -61,12 +63,8 @@ public class TimezoneView extends CircularView {
 
     }
 
-    public static String getTimezoneString(int zone, Locale locale) {
-        if (locale.getLanguage().equals(Locale.CHINA.getLanguage())) {
-            return getTimezoneString(zone, "ZH-CH");
-        }
-
-        return getTimezoneString(zone, "en");
+    public String getTimezoneString(int zone, Locale locale) {
+        return getTimezoneString(zone, locale.getLanguage());
     }
 
     public void setTimezone(int zone) {

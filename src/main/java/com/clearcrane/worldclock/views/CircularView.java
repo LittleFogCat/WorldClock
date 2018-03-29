@@ -1,4 +1,4 @@
-package com.clearcrane.worldclock;
+package com.clearcrane.worldclock.views;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.clearcrane.worldclock.R;
 
 /**
  * Created by jjy on 2018/3/23.
@@ -112,13 +113,13 @@ public class CircularView extends LinearLayout {
 
     private boolean moveLeft() {
         Log.d(TAG, "moveLeft: ");
-        scroll(-mStepPx, DEFAULT_DURATION, mDefaultListener, mDefaultListener);
+        scroll(-mStepPx, DEFAULT_DURATION, mDefaultListener, null);
         return true;
     }
 
     private boolean moveRight() {
         Log.d(TAG, "moveLeft: ");
-        scroll(mStepPx, DEFAULT_DURATION, mDefaultListener, mDefaultListener);
+        scroll(mStepPx, DEFAULT_DURATION, mDefaultListener, null);
         return true;
     }
 

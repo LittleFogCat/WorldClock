@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextSwitcher
+        android:id="@+id/tsTenHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inAnimation="@anim/time_view_in"
+        android:outAnimation="@anim/time_view_out" />
+
+    <TextSwitcher
+        android:id="@+id/tsHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inAnimation="@anim/time_view_in"
+        android:outAnimation="@anim/time_view_out" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="10"
+        android:text=":"
+        android:textColor="@color/white"
+        android:textSize="96px" />
+
+    <TextSwitcher
+        android:id="@+id/tsTenMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inAnimation="@anim/time_view_in"
+        android:outAnimation="@anim/time_view_out" />
+
+    <TextSwitcher
+        android:id="@+id/tsMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inAnimation="@anim/time_view_in"
+        android:outAnimation="@anim/time_view_out" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="10"
+        android:text=":"
+        android:textColor="@color/white"
+        android:textSize="96px" />
+
+    <TextSwitcher
+        android:id="@+id/tsTenSec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inAnimation="@anim/time_view_in"
+        android:outAnimation="@anim/time_view_out" />
+
+    <TextSwitcher
+        android:id="@+id/tsSec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inAnimation="@anim/time_view_in"
+        android:outAnimation="@anim/time_view_out" />
+
+</com.zhy.autolayout.AutoLinearLayout>

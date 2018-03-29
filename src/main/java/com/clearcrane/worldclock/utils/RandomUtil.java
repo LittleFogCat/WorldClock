@@ -1,7 +1,9 @@
-package com.clearcrane.worldclock;
+package com.clearcrane.worldclock.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
+
+import com.clearcrane.worldclock.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +15,8 @@ import java.util.Random;
 
 /**
  * Created by jjy on 2018/3/27.
+ * <p>
+ * 随机工具类。
  */
 
 public class RandomUtil {
@@ -47,5 +51,17 @@ public class RandomUtil {
     public static int random(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
+    }
+
+    public static String randomHans(int min, int max) {
+        StringBuilder s = new StringBuilder();
+        while (s.length() < min) {
+            s.append(getRandomHan());
+        }
+        while (random(0, 100) < 50 && s.length() < max) {
+            s.append(getRandomHan());
+        }
+
+        return s.toString();
     }
 }
