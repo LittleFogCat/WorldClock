@@ -32,7 +32,7 @@ public class SpreadCircleView extends View {
     private void initView() {
         AnimationSet set = new AnimationSet(true);
 
-        Animation scale = new ScaleAnimation(1f, 6f, 1f, 6f,
+        Animation scale = new ScaleAnimation(0.1f, 1f, 0.1f, 1f,
                 ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
                 ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
         scale.setRepeatMode(Animation.RESTART);
