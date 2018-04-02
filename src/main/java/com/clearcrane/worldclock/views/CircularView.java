@@ -96,10 +96,7 @@ public class CircularView extends LinearLayout {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.v(TAG, "onKeyDown: " + keyCode);
-        if (!canMove) {
-            return super.onKeyDown(keyCode, event);
-        }
-        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+        if (canMove && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
                 return moveRight();
             } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {

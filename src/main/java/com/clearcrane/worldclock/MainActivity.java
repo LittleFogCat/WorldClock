@@ -1,8 +1,6 @@
 package com.clearcrane.worldclock;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -14,10 +12,15 @@ import com.clearcrane.worldclock.base.BaseActivity;
 import com.clearcrane.worldclock.utils.Auto;
 import com.clearcrane.worldclock.utils.RandomUtil;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements Thread.UncaughtExceptionHandler {
     private static final String TAG = "MainActivity";
 
     private WorldClockFragment mFragment;
@@ -27,6 +30,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Thread.setDefaultUncaughtExceptionHandler(this);
 
         try {
             Auto.init(this);
@@ -52,6 +57,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return mFragment.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "onBackPressed");
+        super.onBackPressed();
     }
 
     private void onIntent(Intent intent) {
@@ -96,4 +107,29 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+        try {
+            File file = getFilesDir();
+            File logFileDir = new File(file, "log");
+            logFileDir.mkdirs();
+            String fileName = "errorlog" + new SimpleDateFormat("yyyyMMdd", Locale.CHINA).format(new Date());
+            File logFile = new File(logFileDir, fileName);
+            logFile.createNewFile();
+            FileWriter fw = new FileWriter(logFile);
+            PrintWriter pw = new PrintWriter(fw);
+            e.printStackTrace(pw);
+
+            while (e.getCause() != null) {
+                e.getCause().printStackTrace(pw);
+                e = e.getCause();
+            }
+
+            pw.flush();
+            pw.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
 }
