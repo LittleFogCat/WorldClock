@@ -5,8 +5,10 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.clearcrane.worldclock.base.BaseActivity;
 import com.clearcrane.worldclock.utils.Auto;
@@ -25,6 +27,7 @@ public class MainActivity extends BaseActivity implements Thread.UncaughtExcepti
 
     private WorldClockFragment mFragment;
     private Bundle mArgs = new Bundle();
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +57,29 @@ public class MainActivity extends BaseActivity implements Thread.UncaughtExcepti
         Log.d(TAG, "onCreate: " + onSize());
     }
 
+    private boolean shouldExit = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return mFragment.onKeyDown(keyCode, event);
+        Log.d(TAG, "onKeyDown: " + keyCode);
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            onBackPressed();
+//            return true;
+//        }
+        return mFragment.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed");
+        Log.d(TAG, "onBackPressed " + shouldExit);
         super.onBackPressed();
+//        if (shouldExit) {
+//            super.onBackPressed();
+//        } else {
+//            shouldExit = true;
+//            Toast.makeText(this, "再次按返回键退出", Toast.LENGTH_SHORT).show();
+//            mHandler.postDelayed(() -> shouldExit = false, 3000);
+//        }
     }
 
     private void onIntent(Intent intent) {
